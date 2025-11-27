@@ -1,0 +1,7 @@
+<h2>Available Files</h2>
+<ul>
+{% for file in files %}
+    <li>{{ file.name }} — <a href="/download/{{ file.id }}">Download (auto-decrypts)</a></li>
+{% endfor %}
+</ul>
+<a href="/upload">Upload another</a>
