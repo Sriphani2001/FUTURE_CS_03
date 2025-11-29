@@ -1,8 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head><title>Secure File Share</title></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Secure File Sharing System</title>
+</head>
 <body>
     <h1>Secure File Sharing System</h1>
-    <a href="/upload">Upload File</a> | <a href="/files">View Files</a>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <p>[{{ category|upper }}] {{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <p>
+        <a href="{{ url_for('upload') }}">Upload File</a> |
+        <a href="{{ url_for('files') }}">View Files</a>
+    </p>
+
+    <p>
+        This app encrypts files with AES-256 before storing them.
+        Downloads automatically decrypt the file on the server side.
+    </p>
 </body>
 </html>

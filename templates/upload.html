@@ -1,6 +1,33 @@
-<h2>Upload File</h2>
-<form method="post" enctype="multipart/form-data">
-    <input type="file" name="file" required>
-    <button type="submit">Upload (will be encrypted)</button>
-</form>
-<a href="/">Back</a>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Upload File</title>
+</head>
+<body>
+    <h1>Upload File</h1>
+
+    <p>
+        <a href="{{ url_for('index') }}">Home</a> |
+        <a href="{{ url_for('files') }}">View Files</a>
+    </p>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <p>[{{ category|upper }}] {{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <p>
+        Select a file to upload. It will be encrypted before being stored.
+    </p>
+
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload (will be encrypted)</button>
+    </form>
+</body>
+</html>

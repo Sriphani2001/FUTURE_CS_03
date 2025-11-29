@@ -1,7 +1,39 @@
-<h2>Available Files</h2>
-<ul>
-{% for file in files %}
-    <li>{{ file.name }} — <a href="/download/{{ file.id }}">Download (auto-decrypts)</a></li>
-{% endfor %}
-</ul>
-<a href="/upload">Upload another</a>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Available Files</title>
+</head>
+<body>
+    <h1>Available Files</h1>
+
+    <p>
+        <a href="{{ url_for('index') }}">Home</a> |
+        <a href="{{ url_for('upload') }}">Upload File</a>
+    </p>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <p>[{{ category|upper }}] {{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% if files %}
+        <ul>
+            {% for file in files %}
+                <li>
+                    {{ file.name }} —
+                    <a href="{{ url_for('download', file_id=file.id) }}">
+                        Download (auto-decrypts)
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No files have been uploaded yet.</p>
+    {% endif %}
+</body>
+</html>
